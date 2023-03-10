@@ -1,24 +1,12 @@
 const express=require('express')
-const path=require('path')
+
 const router=express.Router()
-const rootdir=require('../utils/path')
-router.get('/add-product',(req,res,next)=>{
-    res.sendFile(path.join(rootdir,'views','add-product.html'))
-})
-router.post('/add-product',(req,res,next)=>{
-    
-    res.redirect('/')
-})
-router.get('/contactus',(req,res,next)=>{
-    res.sendFile(path.join(rootdir,'views','contactus.html'))
-})
-router.get('/success',(req,res,next)=>{
-    res.sendFile(path.join(rootdir,'views','success.html'))
+const productcontroller=require('../controllers/products')
 
+router.get('/add-product',productcontroller.getaddproduct)
 
-})
-router.post('/contactus', (req, res, next) => {
-    console.log(req.body,'-----------------');
-    res.redirect('/success');
-});
+router.post('/add-product',productcontroller.postaddproduct)
+router.get('/contactus',productcontroller.getcontactus)
+router.get('/success',productcontroller.getsuccess)
+router.post('/contactus',productcontroller.postcontact);
 module.exports=router
